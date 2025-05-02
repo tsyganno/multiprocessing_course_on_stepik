@@ -1,16 +1,22 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import multiprocessing as mp
+from time import sleep
+import os
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def task(n: int):
+    sleep(n)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def main():
+    prs = [mp.Process(target=task, args=(i, )) for i in range(4)]
+    for pr in prs:
+        pr.start()
+    sleep(0.5)
+    for pr in mp.active_children():
+        print(f"{pr.name=}, {pr.pid=}")
+
+
+if __name__ == "__main__":
+    main()
+    print(mp.current_process().pid)
+
