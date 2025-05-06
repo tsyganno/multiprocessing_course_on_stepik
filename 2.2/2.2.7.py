@@ -17,7 +17,6 @@ sources = [ссылка1_для_функции1, ссылка2_для_функц
 import typing
 import multiprocessing as mp
 from concurrent.futures import ThreadPoolExecutor
-import time
 
 
 def thread_worker(requests: list[typing.Callable], sources: list[str]) -> None:
